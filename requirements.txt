@@ -1,1 +1,2 @@
-# No third-party dependencies - chess module is local, uses Python standard library
+# Python includes curses on Linux; Windows needs the compatible extension.
+windows-curses; sys_platform == "win32"
