@@ -27,13 +27,22 @@ PlayChess is a two-player chess game that runs in the terminal, featuring a clea
 
 ```bash
 # Clone the repository
-git clone https://github.com/theprawnorganisation/playchess.git
+git clone https://github.com/hongyime/playchess.git
 
 # Navigate to project directory
 cd playchess
 ```
 
-No additional dependencies required - uses Python standard library only.
+Use Python 3 in an interactive terminal. On Linux, install your distribution's
+Python curses package if it is not included. On Windows, install the conditional
+dependency from an activated virtual environment:
+
+```sh
+python -m pip install -r requirements.txt
+```
+
+The requirements file selects `windows-curses` only on Windows; the chess engine
+itself uses the standard library.
 
 ## Usage
 
@@ -44,9 +53,20 @@ python main.py
 # Or on Windows, use the batch file
 run.bat
 
+# Or on Linux, use the shell launcher
+sh run.sh
+
 # Run tests
 python -m unittest test_chess.py
 ```
+
+The launchers resolve the project directory even when called from elsewhere and
+preserve Python's exit status. Set `PYTHON` to an interpreter path when needed.
+The curses interface requires a real terminal. The cross-platform CI job validates
+launcher behavior without opening an interactive game. The existing engine suite
+has known failures independent of these launchers (including uninitialized board
+state and movement-rule assertions), so passing launcher checks does not establish
+that the complete game is healthy.
 
 ### How to Play
 
